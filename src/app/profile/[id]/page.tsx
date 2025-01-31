@@ -1,19 +1,16 @@
 "use client";
 
-import React from 'react'
+import React from "react";
+import { useParams } from "next/navigation";
 
-interface PageProps {
-    params: {
-        id: string;
-    };
-}
+function ProfilePage() {
+    const params = useParams(); // Unwrap the params
 
-function Page({ params }: PageProps) {
     return (
         <>
-            <h1>Profile {params.id}</h1>
+            <h1>Profile: {params.id}</h1>
         </>
-    )
+    );
 }
 
-export default Page;
+export default ProfilePage;

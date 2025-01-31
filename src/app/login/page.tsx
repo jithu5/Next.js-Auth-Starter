@@ -4,6 +4,7 @@ import React, { ChangeEvent, FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import Link from "next/link";
+import toast from "react-hot-toast";
 
 interface User {
   email: string;
@@ -15,8 +16,9 @@ function LoginPage() {
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState<boolean>(false)
 
-  const router = useRouter();
+  const router = useRouter()
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -29,6 +31,24 @@ function LoginPage() {
     e.preventDefault();
 
     console.log(user)
+    try {
+      const { data } = await axios.post(`/api/users/login`, user, {
+        withCredentials: true
+      })
+
+      console.log(data)
+      if (data?.success) {
+        toast.success(data.message)
+        console.log(data.data)
+        router.push('/profile')
+        return
+      }
+    } catch (error: any) {
+      toast.error(error.message)
+    }
+    finally {
+      setLoading(false)
+    }
   };
 
   return (
@@ -59,12 +79,12 @@ function LoginPage() {
                 required
               />
             </div>
-           
+
             <button
               type="submit"
               className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition"
             >
-              Log In
+              {loading ? "Logging in..." : "Log In"}
             </button>
             <p className="text-center my-3 text-black">Create new Account<Link href="/signup">Signup</Link></p>
           </form>

@@ -4,6 +4,7 @@ import Link from "next/link";
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import { useRouter } from 'next/navigation'
 import axios from "axios";
+import toast from "react-hot-toast";
 
 
 interface User {
@@ -19,21 +20,47 @@ function SignupPage() {
     username: "",
   })
 
-  const handleChange=(e: ChangeEvent<HTMLInputElement>)=>{
-    const { name,value} = e.target;
-    setUser(prevState=>{
-      return {...prevState, [name]: value}
+  const [loading, setLoading] = useState<boolean>(false)
+
+  const router = useRouter()
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setUser(prevState => {
+      return { ...prevState, [name]: value }
     });
   }
 
-  const onSignUp= async(e: FormEvent<HTMLFormElement>)=>{
+  const onSignUp = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     console.log(user)
+    setLoading(true)
+    try {
+
+      const response = await axios.post('/api/users/signup', user,
+        {
+          withCredentials: true,
+        }
+      )
+      console.log(response)
+      if (response.data?.success
+      ) {
+        toast.success("Signed up successfully!")
+        router.push('/login')
+
+      }
+    } catch (error) {
+      toast.error("Failed to signup. Please try again.")
+      console.log(error)
+    }
+    finally {
+      setLoading(false)
+    }
 
   }
 
 
- 
+
   return (
     <>
       <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -77,7 +104,7 @@ function SignupPage() {
               type="submit"
               className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition"
             >
-              Sign Up
+              {loading ? "Signing up..." : "Sign Up"}
             </button>
             <h1 className="text-center text-black">
               Already have an account?
@@ -85,7 +112,7 @@ function SignupPage() {
                 Login
               </Link>
             </h1>
- 
+
           </form>
         </div>
       </div>
