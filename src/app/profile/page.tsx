@@ -1,11 +1,30 @@
 "use client";
 
+import axios from "axios";
 import React from "react";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 function ProfilePage() {
     const user = {
         username: "abijith",
         email: "jithuabijith8@gmail.com",
+    };
+
+    const router = useRouter();
+
+    const handleLogout = async (): Promise<void> => {
+        try {
+            const { data } = await axios.get(`/api/users/logout`);
+            console.log(data);
+            if (data?.success) {
+                console.log(data.message)
+                toast.success(data.message);
+                router.push('/login');
+            }
+        } catch (error: any) {
+            toast.error(error.message)
+        }
     };
 
     return (
@@ -22,8 +41,10 @@ function ProfilePage() {
                         <p className="text-gray-600">{user.email}</p>
                     </div>
                     <div className="text-center mt-6">
-                        <button className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition">
-                            Edit Profile
+                        <button 
+                        onClick={handleLogout}
+                        className="bg-stone-700 text-white py-2 px-4 rounded-lg hover:bg-stone-900 transition">
+                            Logout
                         </button>
                     </div>
                 </div>
