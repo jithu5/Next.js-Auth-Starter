@@ -5,6 +5,8 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
+import NavBar from "@/components/NavBar";
+
 interface IUser {
     email: string;
     username: string;
@@ -62,20 +64,7 @@ function ProfilePage() {
     return (
         <div className="min-h-screen bg-gray-50">
             {/* Navbar */}
-            <nav className="bg-stone-700 p-4 shadow-md">
-                <div className="flex justify-between items-center">
-                    <h1 className="text-white text-2xl font-bold">Welcome</h1>
-                    <div className="space-x-4">
-                        <button
-                            onClick={() => router.push('/home')}
-                            className="text-white hover:bg-stone-900 px-4 py-2 rounded-md"
-                        >
-                            Home
-                        </button>
-                    </div>
-                </div>
-            </nav>
-
+           <NavBar />
             {/* Profile Content */}
             <div className="flex flex-col items-center justify-center min-h-screen space-y-6 bg-gray-50 p-8">
                 <h2 className="text-4xl font-bold text-gray-800">Welcome, {user.username}!</h2>
