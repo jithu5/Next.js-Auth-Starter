@@ -71,35 +71,6 @@ cd Next.js-Auth-Starter
 
 ## Project Structure
 
-src/
-├── app/
-│   ├── signup/page.tsx       # Signup page
-│   ├── login/page.tsx        # Login page
-│   ├── verifyemail/page.tsx  # Email verification page
-│   ├── profile/page.tsx      # Profile page
-│   ├── profile/[id]/page.tsx # Dynamic profile page
-│   ├── layout.tsx            # Root layout
-│
-├── components/
-│   ├── NavBar.tsx            # Navigation bar
-│
-├── middleware.ts             # Middleware for route protection
-│
-├── helpers/
-│   ├── getDataFromToken.ts   # Extracts data from JWT
-│   ├── mailer.ts             # Sends verification emails
-│
-├── api/
-│   ├── users/
-│   │   ├── login/route.ts     # User login API
-│   │   ├── signup/route.ts    # User signup API
-│   │   ├── verifyemail/route.ts # Email verification API
-│   │   ├── me/route.ts        # Fetch user data API
-│   │   ├── logout/route.ts    # Logout API
-│
-├── dbConfig/dbConfig.ts      # Database configuration
-├── models/userModel.ts       # User schema/model
-
 - `src/app/signup/page.tsx`: Signup page component
 - `src/app/login/page.tsx`: Login page component
 - `src/app/verifyemail/page.tsx`: Page for email verification
