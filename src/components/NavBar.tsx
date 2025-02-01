@@ -12,11 +12,11 @@ function NavBar() {
                             >
                                 Home
                             </button>
-                            <div className="absolute bg-gray-200 right-0 top-[100%] hidden group-hover:flex flex-col rounded-md py-5 px-12 text-stone-700 w-fit">
+                            {/* <div className="absolute bg-gray-200 right-0 top-[100%] hidden group-hover:flex flex-col rounded-md py-5 px-12 text-stone-700 w-fit">
                                 <p className="hover:text-stone-900 cursor-pointer text-sm">verifyAccount</p>
 
 
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>

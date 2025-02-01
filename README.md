@@ -1,36 +1,133 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js Authentication Project
 
-## Getting Started
+This project demonstrates a simple authentication system using **Next.js** and **TypeScript**, including user signup, login, email verification with **Mailtrap**, and profile management.
 
-First, run the development server:
+---
+
+## Features
+
+- User Signup
+- User Login
+- Email Verification (via Mailtrap)
+- Profile Page
+- Middleware for Route Protection
+- JWT-based Authentication
+
+## Technologies Used
+
+- **Next.js**
+- **TypeScript**
+- **Axios**
+- **React Hot Toast** for notifications
+- **JSON Web Tokens (JWT)**
+- **MongoDB (Mongoose)**
+- **Mailtrap** for email verification
+- **Bcryptjs** for password hashing
+
+---
+
+## Setup Instructions
+
+### 1. Clone the repository
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/jithu5/Next.js-Auth-Starter.git
+cd Next.js-Auth-Starter
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Install dependencies
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+   ```bash
+   npm install
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 3. Set up environment variables
 
-## Learn More
+   Create a `.env.local` file in the root directory and add the following variables:
 
-To learn more about Next.js, take a look at the following resources:
+   ``` env
+   MONGO_URI=<DATABSE_URL>
+    TOKEN_SECRET=<JWT TOKEN SECRET>
+    DOMAIN=<APP URL>
+    NODE_ENV=<NODE_ENV>
+    SMTP_HOST=<SMTP_HOST>
+    SMTP_PORT=<SMTP_PORT>
+    SMTP_USER=<SMTP_USER>
+    SMTP_PASS=<SMTP_PASS>
+    SMTP_USERGMAIL=<USER EMAIL>
+     ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 4. Run the development server
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   ```bash
+   npm run dev
+   ```
 
-## Deploy on Vercel
+### 5. Open your browser
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   Navigate to [http://localhost:3000](http://localhost:3000)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## Project Structure
+
+src/
+├── app/
+│   ├── signup/page.tsx       # Signup page
+│   ├── login/page.tsx        # Login page
+│   ├── verifyemail/page.tsx  # Email verification page
+│   ├── profile/page.tsx      # Profile page
+│   ├── profile/[id]/page.tsx # Dynamic profile page
+│   ├── layout.tsx            # Root layout
+│
+├── components/
+│   ├── NavBar.tsx            # Navigation bar
+│
+├── middleware.ts             # Middleware for route protection
+│
+├── helpers/
+│   ├── getDataFromToken.ts   # Extracts data from JWT
+│   ├── mailer.ts             # Sends verification emails
+│
+├── api/
+│   ├── users/
+│   │   ├── login/route.ts     # User login API
+│   │   ├── signup/route.ts    # User signup API
+│   │   ├── verifyemail/route.ts # Email verification API
+│   │   ├── me/route.ts        # Fetch user data API
+│   │   ├── logout/route.ts    # Logout API
+│
+├── dbConfig/dbConfig.ts      # Database configuration
+├── models/userModel.ts       # User schema/model
+
+- `src/app/signup/page.tsx`: Signup page component
+- `src/app/login/page.tsx`: Login page component
+- `src/app/verifyemail/page.tsx`: Page for email verification
+- `src/app/profile/page.tsx`: Profile page component
+- `src/app/profile/[id]/page.tsx`: Dynamic profile page component
+
+- `src/app/layout.tsx`: Root layout component
+
+- `src/components/NavBar.tsx`: Navigation bar component
+
+- `src/middleware.ts`: Middleware for route protection
+
+- `src/helpers/getDataFromToken.ts`: Helper function to extract data from JWT
+- `src/helpers/mailer.ts`: Helper function to send mail
+
+- `src/app/api/users/login/route.ts`: API route to handle user login
+- `src/app/api/users/signup/route.ts`: API route to handle user signup
+- `src/app/api/users/verifyemail/route.ts`: API route to handle user email verification
+- `src/app/api/users/me/route.ts`: API route to fetch user data
+- `src/app/api/users/logout/route.ts`: API route to handle user logout
+
+- `src/dbConfig/dbConfig.ts`: Database configuration
+- `src/models/userModel.ts`: User Model configuration
+
+## Usage
+
+- **Signup:** Create a new account by providing a username, email, and password.
+- **Login:** Log in with your email and password.
+- **Profile:** View your profile information and log out.
+
+---

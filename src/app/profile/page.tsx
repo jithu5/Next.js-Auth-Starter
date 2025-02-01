@@ -18,6 +18,7 @@ function ProfilePage() {
         username: "",
     });
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const router = useRouter();
 
     useEffect(() => {
         async function fetchUser() {
@@ -28,6 +29,7 @@ function ProfilePage() {
                     setUser(data.data);
                 } else {
                     toast.error(data.message || "Failed to load user data");
+                    router.push('/login');  // Redirect to login page after failed login attempt
                 }
             } catch (error) {
                 toast.error("Error fetching user data");
@@ -39,7 +41,6 @@ function ProfilePage() {
         fetchUser();
     }, []);
 
-    const router = useRouter();
 
     const handleLogout = async (): Promise<void> => {
         try {
@@ -48,6 +49,7 @@ function ProfilePage() {
                 toast.success(data.message);
                 router.push('/login');  // Redirect to login page after successful logout
             }
+            
         } catch (error: any) {
             toast.error(error.message || "Error logging out");
         }

@@ -45,8 +45,8 @@ function SignupPage() {
       console.log(response)
       if (response.data?.success
       ) {
-        toast.success("Signed up successfully!")
-        router.push('/login')
+        toast.success("Signed up successfully! check email")
+        
 
       }
     } catch (error) {
